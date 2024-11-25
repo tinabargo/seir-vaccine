@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use these codes, please cite it as below."
+authors:
+  - family-names: Bargo,
+    given-names: Ma. Cristina R.
+    orcid: https://orcid.org/0000-0002-2137-6360
+title: "Uncertainty and Sensitivity Analysis on an Epidemic Model with a Mass Vaccination Program on a Homogeneous Population"
+version: 1.0
+date-released: 2024-11-25
