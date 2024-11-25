@@ -21,6 +21,8 @@ pmax = [1.3 1 100000 0.6 0.25 0.3];
 nsamp = 700;
 matLHS = lhsu(pmin,pmax,nsamp);
 matLHS = [pbase; matLHS]; % add the base values in 1st row
+% save LHS matrix for replicability
+writematrix(matLHS,'LHSmatrix.csv')
 
 % generate the output matrix
 matOW = modeloutputWt(matLHS);
