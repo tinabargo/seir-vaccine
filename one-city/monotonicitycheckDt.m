@@ -5,14 +5,14 @@ temp = ones(nrow+1,1);
 tind = 7:7:140;
 tlength = length(tind);
 
-% % parameter values for [beta r delta kappa gamma alpha]
-% pbase = [1.3 0.5 10000 0.2 0.05 0.05];
-% pmin = [0.01 0 100 0.01 0.05 0.01];
-% pmax = [1.3 1 100000 0.6 0.25 0.3];
+% parameter values for [beta r delta kappa gamma alpha]
+R0 = 2.41; kappa1 = 5.5; gamma1 = 6.5; alph = 0.09;
+arr = 0.75; del = 27887;
+pbase = [(R0/gamma1) arr del (1/kappa1) (1/gamma1) alph];
 
-pbase = [1.3 0.5 10000 0.2 0.05 0.5];
-pmin = [0.01 0 100 0.01 0.05 0.4];
-pmax = [1.3 1 100000 0.6 0.25 0.75];
+% generate sample values of the parameters using Latin Hypercube Sampling
+paramtemp = lhsu(nrow);
+paramsource = [pbase; paramtemp];
 
 % input labels [beta r delta kappa gamma alpha]
 labelx = ["\beta","r","\delta","\kappa","\gamma","\alpha"];
@@ -22,16 +22,14 @@ for ind = 1:ncol
     Mparam = temp*pbase;
 
     % replace one column with sample values
-    param0 = pmin(ind); paramend = pmax(ind);
-    dparam = (paramend - param0)/nrow;
-    paramvec = param0 + dparam*(0:nrow)';
+    paramvec = paramsource(:,ind);
     Mparam(:,ind) = paramvec;
 
     modelout = modeloutputDt(Mparam);
 
     for ts = 1:tlength
         figure
-        plot(paramvec,modelout(:,1))
+        plot(paramvec,modelout(:,1),'.')
         title('D vs ' + labelx(ind) + ' at t = ' + tind(ts))
         xlabel(labelx(ind))
         ylabel('D')

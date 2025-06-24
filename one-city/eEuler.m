@@ -1,4 +1,4 @@
-function y = eEuler(t,x,paramvec,h)
+function y = eEuler(t,x,paramvec,constvec,h)
 % one-step explicit Euler scheme
 % Input parameters:
 % - t: time (real)
@@ -9,4 +9,4 @@ function y = eEuler(t,x,paramvec,h)
 % Output parameter:
 % - y: values of the state variables at the next timestep (vector)
 
-y = x + h*onecity(t,x,paramvec);
+y = x + h*onecity(t,x,paramvec,constvec);

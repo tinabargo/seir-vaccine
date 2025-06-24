@@ -1,4 +1,4 @@
-% Uncertainty Analysis via LHS
+% Sampling via LHS
 % Sensitivity Analysis via PRCC
 
 % matrix where we store prcc and p-values
@@ -13,20 +13,12 @@ cn = {'W(7)','W(14)','W(21)','W(28)','W(35)','W(42)','W(49)','W(56)',...
     'D(35)','D(42)','D(49)','D(56)','D(63)','D(70)','D(77)','D(84)',...
     'D(91)','D(98)','D(105)','D(112)','D(119)','D(126)','D133)','D(140)'};
 
-% generate the LHS matrix
-% [beta r delta kappa gamma alpha]
-pbase = [1.3 0.5 10000 0.2 0.05 0.05];
-pmin = [0.01 0 100 0.01 0.05 0.01];
-pmax = [1.3 1 100000 0.6 0.25 0.3];
-nsamp = 700;
-matLHS = lhsu(pmin,pmax,nsamp);
-matLHS = [pbase; matLHS]; % add the base values in 1st row
-% save LHS matrix for replicability
-writematrix(matLHS,'LHSmatrix.csv')
+% reading the stored LHS matrix
+matLHS = csvread('LHSmatrix.csv');
 
-% generate the output matrix
-matOW = modeloutputWt(matLHS);
-matOD = modeloutputDt(matLHS);
+% reading the stored output matrices
+matOW = csvread('WOutput.csv');
+matOD = csvread('DOutput.csv');
 
 % rank-transform the LHS matrix
 [LHSr,LHSc] = size(matLHS);
